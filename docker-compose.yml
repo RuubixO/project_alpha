@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  db:
+    image: postgres 11.2
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+  app:   # Django app
+    build: .
+      command: python /opt/app/manage.py runserver 0:8000
+      # SECRET_KEY
+      env_file: .env
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+      networks:
+        - backend
+      volumes:
+        - ./app:/opt/app
+
+
+# private connection explicitly set for backend communication btw processes
+networks:
+  backend:
+    driver: bridge

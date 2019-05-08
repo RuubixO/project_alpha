@@ -1,0 +1,8 @@
+# outside links used to create this repo:
+
+1. My cleaned up notes and steps through docker-django-postgres app setup
+  source: https://docs.google.com/document/d/1ooxcJpZfsAcy5pXmMirPwBpL2LeFu6h58g43WZdaPno/edit
+
+2. Web article that does a good job breaking down Dockerfile and docker-compose.yml
+and how they are effectively applied to django apps.
+  source: https://www.revsys.com/tidbits/brief-intro-docker-djangonauts/
