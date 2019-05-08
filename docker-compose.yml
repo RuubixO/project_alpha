@@ -11,17 +11,17 @@ services:
       - backend
   app:   # Django app
     build: .
-      command: python /opt/app/manage.py runserver 0:8000
-      # SECRET_KEY
-      env_file: .env
-      ports:
-        - "8000:8000"
-      depends_on:
-        - db
-      networks:
-        - backend
-      volumes:
-        - ./app:/opt/app
+        command: python /opt/app/manage.py runserver 0:8000
+        # SECRET_KEY
+        env_file: .env
+        ports:
+          - "8000:8000"
+          depends_on:
+            - db
+          networks:
+            - backend
+          volumes:
+            - ./app:/opt/app
 
 
 # private connection explicitly set for backend communication btw processes
