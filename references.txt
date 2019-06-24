@@ -6,3 +6,9 @@
 2. Web article that does a good job breaking down Dockerfile and docker-compose.yml
 and how they are effectively applied to django apps.
   source: https://www.revsys.com/tidbits/brief-intro-docker-djangonauts/
+
+3. Docker-compose commands
+  a. docker-compose run
+    https://docs.docker.com/compose/reference/run/
+  b. docker system prune
+    https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes

@@ -1,14 +1,10 @@
 FROM python:3.7
 
-
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /code
-WORKDIR /code
+COPY ./src /opt/app
 
-COPY src/requirements.txt /opt/app/requirements.txt
+RUN python -m pip install --upgrade pip
 RUN pip install -r /opt/app/requirements.txt
-
-COPY . /code/
 
 EXPOSE 8000

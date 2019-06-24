@@ -2,28 +2,47 @@ version: '3'
 
 services:
   db:
-    image: postgres 11.2
+    image: postgres
+    restart: always
     volumes:
       - pg_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - backend
-  app:   # Django app
+  app:   # Django project service
+    env_file:
+      - .env  # extract DEV_SECRET_KEY
     build: .
-        command: python /opt/app/manage.py runserver 0:8000
-        # SECRET_KEY
-        env_file: .env
-        ports:
-          - "8000:8000"
-          depends_on:
-            - db
-          networks:
-            - backend
-          volumes:
-            - ./app:/opt/app
+    restart: always
+    command: python /opt/app/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - backend
+    volumes:
+      - ./src:/opt/app
+  manage:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: shell
+    entrypoint: /usr/local/bin/python3 /opt/app/manage.py
+    networks:
+      - backend
+    volumes:  # must use same volume as 'web' service
+      - ./src:/opt/app
+    depends_on:
+      - db
 
 
+volumes:
+  pg_data: {}
+  app:
 # private connection explicitly set for backend communication btw processes
 networks:
   backend:
